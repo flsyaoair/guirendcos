@@ -1,13 +1,10 @@
 # -*- coding: UTF-8 -*- 
 from src import create_dcos_app
-from src.cmconfig import *
-from src import mesoscollet
-from src import marathoncollet
+from src.dcosconfig import *
 
 app = create_dcos_app()
 
 if __name__ == '__main__':
-#     app.debug = DEBUG
-#     app.run(host= HOST,port=PORT)
-      mesoscollet.create()
-      marathoncollet.marathoncollet()
+    app.debug = False
+    app.run(host= HOST,port=PORT)
+
