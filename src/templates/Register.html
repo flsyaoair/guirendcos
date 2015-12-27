@@ -1,0 +1,85 @@
+{% extends 'BaseLayout.html'%}
+{% block content %}
+<div class="container">
+    <div class="post row" style="min-height: 100%; _min-height: 100%;">
+	    <div class="col-sm-10 col-sm-push-1">
+	        <div class="post-header row">
+	        	<div class="col-sm-2" style="border-color: #FFFFFF; border-right: 1px solid #E5E5E5;">
+	        		<strong>testTeam</strong>
+	        	</div>
+	        	<div class="col-sm-3">
+	        		<i class="fa fa-user fa-fw"></i>新用户注册
+	        	</div>
+	        </div>
+	        <div class="panel-body">
+	            <form class="form-horizontal" role="form" name="registerForm" novalidate ng-controller="RegisterCtrl">
+	                <div class="form-group">
+	                    <label class="col-sm-2 control-label"><span class="text-danger">*</span>电子邮件</label>
+	                    <div class="col-sm-7">
+	                        <div class="input-group">
+	                            <span class="input-group-addon"><i class="fa fa-envelope fa-fw"></i></span>
+	                            <input type="email" name="Email" ng-model="User.Email" class="form-control default-focus" placeholder="电子邮件" ng-maxlength="255" required />
+	                        </div>
+	                    </div>
+	                    <div class="col-sm-3">
+	                        <div ng-show="registerForm.Email.$dirty&&registerForm.Email.$error.required" class="text-danger">请输入电子邮件</div>
+	                        <div ng-show="registerForm.Email.$dirty&&registerForm.Email.$error.maxlength" class="text-danger">电子邮件最大长度为255</div>
+	                        <div ng-show="registerForm.Email.$dirty&&registerForm.Email.$error.email" class="text-danger">电子邮件格式不合法</div>
+	                    </div>
+	                </div>
+	                <div class="form-group">
+	                    <label class="col-sm-2 control-label"><span class="text-danger">*</span>昵称</label>
+	                    <div class="col-sm-7">
+	                        <div class="input-group">
+	                            <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
+	                            <input type="text" name="Nick" ng-model="User.Nick" class="form-control" placeholder="昵称" ng-maxlength="10" required />
+	                        </div>
+	                    </div>
+	                    <div class="col-sm-3">
+	                        <div ng-show="registerForm.Nick.$dirty&&registerForm.Nick.$error.required" class="text-danger">请输入昵称</div>
+	                        <div ng-show="registerForm.Nick.$dirty&&registerForm.Nick.$error.maxlength" class="text-danger">昵称的最大长度为10</div>
+	                    </div>
+	                </div>
+	                <div class="form-group">
+	                    <label class="col-sm-2 control-label"><span class="text-danger">*</span>密码</label>
+	                    <div class="col-sm-7">
+	                        <div class="input-group">
+	                            <span class="input-group-addon"><i class="fa fa-lock fa-fw"></i></span>
+	                            <input type="password" name="Password" ng-model="User.Password" class="form-control" placeholder="密码" ng-maxlength="20" required />
+	                        </div>
+	                    </div>
+	                    <div class="col-sm-3">
+	                        <div ng-show="registerForm.Password.$dirty&&registerForm.Password.$error.required" class="text-danger">请输入密码</div>
+	                        <div ng-show="registerForm.Password.$dirty&&registerForm.Password.$error.maxlength" class="text-danger">密码最大长度为20</div>
+	                    </div>
+	                </div>
+	                <div class="form-group">
+	                    <label class="col-sm-2 control-label"><span class="text-danger">*</span>确认密码</label>
+	                    <div class="col-sm-7">
+	                        <div class="input-group">
+	                            <span class="input-group-addon"><i class="fa fa-lock fa-fw"></i></span>
+	                            <input type="password" name="ConfirmPassword" ng-model="User.ConfirmPassword" class="form-control" placeholder="确认密码" ng-maxlength="20" required />
+	                        </div>
+	                    </div>
+	                    <div class="col-sm-3">
+	                        <div ng-show="registerForm.ConfirmPassword.$dirty&&registerForm.ConfirmPassword.$error.required" class="text-danger">请输入确认密码</div>
+	                        <div ng-show="registerForm.ConfirmPassword.$dirty&&registerForm.ConfirmPassword.$error.maxlength" class="text-danger">确认密码最大长度为20</div>
+	                        <div ng-show="registerForm.Password.$dirty&&registerForm.ConfirmPassword.$dirty&&User.ConfirmPassword!=User.Password" class="text-danger">两次密码不一致</div>
+	                    </div>
+	                </div>
+	                <div class="form-group">
+	                    <div class="col-sm-offset-2 col-sm-10">
+	                        <button type="button" ng-click="register()" id="btnRegister" data-loading-text="正在注册" ng-disabled="registerForm.$invalid||User.ConfirmPassword!=User.Password" class="btn btn-primary"><i class="fa fa-user fa-fw"></i>注册</button>
+	                        <button type="reset" class="btn btn-primary"><i class="fa fa-eraser fa-fw"></i>重置</button>
+	                        <a href="/" class="btn btn-primary"><i class="fa fa-arrow-left fa-fw"></i>返回</a>
+	                        <div class="notic notic-info" ng-show="userExist">
+	                            <span class="text-danger">邮箱已存在,请尝试其他邮箱</span>
+	                        </div>
+	                    </div>
+	                </div>
+	            </form>
+	        </div>
+	    </div>
+    </div>
+</div>
+{% endblock %}
