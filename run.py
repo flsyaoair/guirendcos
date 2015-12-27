@@ -1,5 +1,4 @@
 # -*- coding: UTF-8 -*- 
-
 from src import create_dcos_app
 from src.cmconfig import *
 from src import mesoscollet
