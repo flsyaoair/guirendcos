@@ -3,6 +3,7 @@ import json
 import os
 from flask import Module,render_template,jsonify,request,g
 from src.dcosconfig import *
+from src.services import dockerservice
 docker = Module(__name__)
 @docker.route('/Container/ServerModel',methods=['POST'])
 #config docker profile
@@ -14,6 +15,9 @@ def createContainerServerModel ():
         hostport = request.json['HostPort']
         containerpath = request.json['ContainerPath']
         hostpath = request.json['HostPath']
+       
+        dockerservice.create_dockerservermodel(nickname,imagetype,imagename,containerport,hostport,containerpath,hostpath)
+
 #         pathList = request.json['PathList']
 #     try:
 #         containerpath = request.json['ContainerPath']
@@ -29,24 +33,19 @@ def createContainerServerModel ():
 #         empty = True
 #     exist_json = {'exist': exist, 'empty': empty}
 #         return jsonify("Ture")
-        return 'ok'  
+        return jsonify(created=True)
     
     
-@docker.route('/ServerModel/Update',methods=['POST'])
+@docker.route('/Container/ServerModel/Update',methods=['POST'])
 def serverModelUpdate():
-    ProjectId = request.json['ProjectId']
-    IssueId = request.json['IssueId']
-    subject = request.json['Subject']
-    projectmodule_id = request.json['ProjectModuleId']
-    assign_to = request.json['AssignTo']
-    if int(assign_to) == -1:
-        assign_to = g.user_id
-    priority = request.json['Priority']
-    category_id = request.json['CategoryId']
-    status = request.json['Status']
-    feedback = request.json['Feedback']
-    issueservice.update(ProjectId,IssueId,subject,projectmodule_id,category_id,assign_to,priority,status,feedback,g.user_id)
-    return jsonify(updated=True)
+        servermodel_id = request.json['ServerModelId']
+        imagename = request.json['ImageName']
+        containerport = request.json['ContainerPort']    
+        hostport = request.json['HostPort']
+        containerpath = request.json['ContainerPath']
+        hostpath = request.json['HostPath']
+        dockerservice.update_dockerservermodel(servermodel_id,imagename,containerport,hostport,containerpath,hostpath)
+        return jsonify(updated=True)
 
 @docker.route('/ServerModel/Delete',methods=['POST'])
 def serverModelDelete():
@@ -64,29 +63,24 @@ def createContainerResourceModel ():
         case = request.json['Case']
         dockercpu = request.json['DockerCpu']
         dockermemory = request.json['DockerMemory']
-        dockervolume = request.json['DockerVolume']  
-        return 'ok' 
+        dockervolume = request.json['DockerVolume'] 
+        dockerservice.create_dockerresourcemodel(nickname,case,dockercpu,dockermemory,dockervolume) 
+        return jsonify(created=True)
     
 
-@docker.route('/ServerModel/Update',methods=['POST'])
+@docker.route('/Container/ResourceModel/Update',methods=['POST'])
 def resourceModelUpdate():
-    ProjectId = request.json['ProjectId']
-    IssueId = request.json['IssueId']
-    subject = request.json['Subject']
-    projectmodule_id = request.json['ProjectModuleId']
-    assign_to = request.json['AssignTo']
-    if int(assign_to) == -1:
-        assign_to = g.user_id
-    priority = request.json['Priority']
-    category_id = request.json['CategoryId']
-    status = request.json['Status']
-    feedback = request.json['Feedback']
-    issueservice.update(ProjectId,IssueId,subject,projectmodule_id,category_id,assign_to,priority,status,feedback,g.user_id)
-    return jsonify(updated=True)
+        resourcemodel_id = request.json['ResourceModelId']
+        case = request.json['Case']
+        dockercpu = request.json['DockerCpu']
+        dockermemory = request.json['DockerMemory']
+        dockervolume = request.json['DockerVolume'] 
+        dockerservice.update_dockerresourcemodel(resourcemodel_id, case, dockercpu, dockermemory, dockervolume)
+        return jsonify(updated=True)
 
 @docker.route('/ServerModel/Delete',methods=['POST'])
 def resourceDelete():
-    issueservice.delete(request.json['IssueId'])
+    dockerservice.delete(request.json['IssueId'])
     return jsonify(deleted=True)    
 def resourceModellist(servermodel_id):
     member_list = teamservice.member_in_project(servermodel_id)
