@@ -82,10 +82,12 @@ def resourceModelUpdate():
 def resourceDelete():
     dockerservice.resourceModelDelete(request.json['ResourceModelId'])
     return jsonify(deleted=True)    
-def resourceModellist(servermodel_id):
-    member_list = teamservice.member_in_project(servermodel_id)
-    category = issueservice.available_category()
-    return render_template('ServerModel/List.html',ProjectId=project_id,MemberList=member_list,Category=category)    
+def resourceModelList():
+    resouceModel_list = dockerservice.query_resourceModelList()
+    return render_template('ResourceModel/List.html',resouceModellist=resouceModel_list) 
+def serverModelList():
+    serverModel_list = dockerservice.query_serverModelList()
+    return render_template('ServerModel/List.html',serverModellist=serverModel_list)   
 
 
 @docker.route('/Container/MergeModel',methods=['POST'])     
@@ -109,23 +111,7 @@ def createContainerProfile():
         name = readed['id'] 
         json.dump(readed, open('src/static/model/docker/app.json', 'w'))
         return 'ok'
-def query():
-    subject = request.json['Subject']
-    assign_to = int(request.json['AssignTo'])
-    if assign_to == -1:
-        assign_to = g.user_id
-    category_id = int(request.json['CategoryId'])
-    status_open = request.json['Open']
-    status_fixed = request.json['Fixed']
-    status_closed = request.json['Closed']
-    status_canceled = request.json['Canceled']
-    page_no = request.json['PageNo']
-    (row_count,page_count,page_no,page_size,data) = issueservice.query(subject,assign_to,category_id,status_open,status_fixed,status_closed,status_canceled,'CreateDate',page_no,PAGESIZE_issue,g.user_id)
-    issue_list = []
-    for i in data.all():
-        issue_list.append({'IssueId':i.IssueId,'ProjectId':i.ProjectId,'ProjectKey':i.ProjectProfile.ProjectKey,'Category':i.Category.CategoryName,'Subject':i.Subject,'Priority':i.Priority,'Status':i.Status,'AssignTo':i.AssignToProfile.Nick,'Creator':i.CreatorProfile.Nick,'LastUpdateDate':i.LastUpdateDate.isoformat()})
-    return jsonify(row_count=row_count,page_count=page_count,page_no=page_no,page_size=page_size,data=issue_list)
-    
+
 if __name__ == '__main__':
     createContainerProfile()    
     

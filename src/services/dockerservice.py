@@ -64,4 +64,17 @@ def resourceModelDelete(resourcemodel_id):
     session = database.get_session()
     docker = session.query(dockerResourceModel).filter(dockerResourceModel.ResourceModelId == resourcemodel_id).delete()
     session.commit()
-    session.close()         
+    session.close() 
+    
+    
+def query_serverModelList():
+    session = database.get_session()
+    servermodellist = session.query(dockerServerModel).all()
+    session.close()
+    return servermodellist   
+    
+def query_resourceModelList():
+    session = database.get_session()
+    resourcemodellist = session.query(dockerResourceModel).all()
+    session.close()
+    return resourcemodellist         
