@@ -47,9 +47,9 @@ def serverModelUpdate():
         dockerservice.update_dockerservermodel(servermodel_id,imagename,containerport,hostport,containerpath,hostpath)
         return jsonify(updated=True)
 
-@docker.route('/ServerModel/Delete',methods=['POST'])
+@docker.route('/Container/ServerModel/Delete',methods=['POST'])
 def serverModelDelete():
-    issueservice.delete(request.json['IssueId'])
+    dockerservice.serverModelDelete(request.json['ServerModelId'])
     return jsonify(deleted=True)    
 def serverModellist(servermodel_id):
     member_list = teamservice.member_in_project(servermodel_id)
@@ -78,9 +78,9 @@ def resourceModelUpdate():
         dockerservice.update_dockerresourcemodel(resourcemodel_id, case, dockercpu, dockermemory, dockervolume)
         return jsonify(updated=True)
 
-@docker.route('/ServerModel/Delete',methods=['POST'])
+@docker.route('/Container/ResourceModel/Delete',methods=['POST'])
 def resourceDelete():
-    dockerservice.delete(request.json['IssueId'])
+    dockerservice.resourceModelDelete(request.json['ResourceModelId'])
     return jsonify(deleted=True)    
 def resourceModellist(servermodel_id):
     member_list = teamservice.member_in_project(servermodel_id)

@@ -20,7 +20,7 @@ def create_dockerservermodel(nickname,imagetype,imagename,containerport,hostport
     session.close()
 def update_dockerservermodel(servermodel_id,imagename,containerport,hostport,containerpath,hostpath):
     session = database.get_session()
-    docker = session.query(dockerServerModel).filter(dockerServerModel.ServiceModeld == servermodel_id).one()
+    docker = session.query(dockerServerModel).filter(dockerServerModel.ServerModelId == servermodel_id).one()
     docker.ImageName = imagename
     docker.ContainerPort = containerport
     docker.HostPort = hostport
@@ -30,6 +30,12 @@ def update_dockerservermodel(servermodel_id,imagename,containerport,hostport,con
     session.add(docker)
     session.commit()
     session.close()
+    
+def serverModelDelete(servermodel_id):
+    session = database.get_session()
+    docker = session.query(dockerServerModel).filter(dockerServerModel.ServerModelId == servermodel_id).delete()
+    session.commit()
+    session.close()   
 #docker 资源模板         
 def create_dockerresourcemodel(nickname,case,dockercpu,dockermemory,dockervolume):
     session = database.get_session()
@@ -53,4 +59,9 @@ def update_dockerresourcemodel(resourcemodel_id,case,dockercpu,dockermemory,dock
     docker.DockerVolume = dockervolume
     docker.LastUpdateDate = datetime.now()  
     session.commit()
-    session.close()      
+    session.close()
+def resourceModelDelete(resourcemodel_id):
+    session = database.get_session()
+    docker = session.query(dockerResourceModel).filter(dockerResourceModel.ResourceModelId == resourcemodel_id).delete()
+    session.commit()
+    session.close()         

@@ -13,7 +13,7 @@ class docker(BaseModel):
 class dockerServerModel(BaseModel):
 
     __tablename__ = 'dockerServerModel'
-    ServiceModeld = Column('ServiceModeld', Integer,primary_key=True,nullable=False,autoincrement=True)
+    ServerModelId = Column('ServerModelId', Integer,primary_key=True,nullable=False,autoincrement=True)
     NickName = Column('NickName', NVARCHAR(30),nullable = False)
     ImageType = Column('ImageType', NVARCHAR(30),nullable = False)
     ImageName = Column('ImageName', NVARCHAR(30),nullable = False)
