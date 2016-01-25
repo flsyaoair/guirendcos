@@ -51,11 +51,6 @@ def serverModelUpdate():
 def serverModelDelete():
     dockerservice.serverModelDelete(request.json['ServerModelId'])
     return jsonify(deleted=True)    
-def serverModellist(servermodel_id):
-    member_list = teamservice.member_in_project(servermodel_id)
-    category = issueservice.available_category()
-    return render_template('ServerModel/List.html',ProjectId=project_id,MemberList=member_list,Category=category)    
-
 
 @docker.route('/Container/ResourceModel',methods=['POST'])
 def createContainerResourceModel ():
