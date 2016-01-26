@@ -85,28 +85,18 @@ def serverModelList():
     return render_template('ServerModel/List.html',serverModellist=serverModel_list)   
 
 
-@docker.route('/Container/MergeModel',methods=['POST'])     
-def MergeContainerProfile(servermodelid,resourcemodelid):
-        try:
-           readed = json.load(open('src/static/model/docker/temp.json', 'r'))
-        except Exception,e:
-           print Exception,':',e
-        readed['container']['docker']['image'] = createContainerServerModel.imagename
-        name = readed['id'] 
-        json.dump(readed, open('src/static/model/docker/app.json', 'w'))
-        return 'ok'    
-@docker.route('/Container/commit',methods=['POST'])     
-def createContainerProfile():
-        
-        try:
-           readed = json.load(open('src/static/model/docker/temp.json', 'r'))
-        except Exception,e:
-           print Exception,':',e
-        readed['container']['docker']['image'] = createContainerServerModel.imagename
-        name = readed['id'] 
-        json.dump(readed, open('src/static/model/docker/app.json', 'w'))
-        return 'ok'
+# @docker.route('/Container/MergeModel',methods=['POST'])     
+# def MergeContainerProfile(servermodelid,resourcemodelid):
+#         try:
+#            readed = json.load(open('src/static/model/docker/temp.json', 'r'))
+#         except Exception,e:
+#            print Exception,':',e
+#         readed['container']['docker']['image'] = createContainerServerModel.imagename
+#         name = readed['id'] 
+#         json.dump(readed, open('src/static/model/docker/app.json', 'w'))
+#         return 'ok'    
+
 
 if __name__ == '__main__':
-    createContainerProfile()    
+    print 'ok'   
     
