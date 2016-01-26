@@ -29,7 +29,7 @@ def createApp ():
            print Exception,':',e
         readed['container']['docker']['image'] = sl.ImageName
         name = readed['id'] 
-        json.dump(readed, open('src/static/model/docker/app.json', 'w'))
+        json.dump(readed, open('src/static/model/docker/'+projectkey+'app.json', 'w'))
         dockerprofile=dict(resourcemodeldict, **servermodeldict)
         dockerprofile = str(dockerprofile)
 
@@ -37,38 +37,32 @@ def createApp ():
         projectservice.create_project(projectname,projectkey,packagegettype,scmurl,poll,shell,status)
         projectservice.create_projectProfile(projectkey,dockerprofile)
         
-
-#         pathList = request.json['PathList']
-#     try:
-#         containerpath = request.json['ContainerPath']
-#         hostpath = request.json['HostPath']
-#     except KeyError,e:
-#         containerpath = ''
-#         hostpath = ''
-#     if (request.json['ProjectName'] != '') & (request.json['ProjectKey'] != ''):
-#         exist = dockerservice.create(request.json['ProjectName'],request.json['ProjectKey'],Introduction,g.user_id)
-#         empty = False
-#     else :
-#         exist = True
-#         empty = True
-#     exist_json = {'exist': exist, 'empty': empty}
-#         return jsonify("Ture")
         return jsonify(created=True)
     
     
-@project.route('/Container/ServerModel/Update',methods=['POST'])
-def serverModelUpdate():
-        servermodel_id = request.json['ServerModelId']
+@project.route('/App/Update',methods=['POST'])
+def updateProjectProfile():
+        projectkey = request.json['ProjectKey']
         imagename = request.json['ImageName']
         containerport = request.json['ContainerPort']    
         hostport = request.json['HostPort']
         containerpath = request.json['ContainerPath']
         hostpath = request.json['HostPath']
-        dockerservice.update_dockerservermodel(servermodel_id,imagename,containerport,hostport,containerpath,hostpath)
+        
+        case = request.json['Case']
+        dockercpu = request.json['DockerCpu']
+        dockermemory = request.json['DockerMemory']
+        dockervolume = request.json['DockerVolume']
+        resourcemodeldict = {"Case":case,"DockerCpu":dockercpu,"DockerMemory":dockermemory,"DockerVolume":dockervolume}
+        servermodeldict = {"ImageName":imagename,"ContainerPort":containerport,"HostPort":hostport,"ContainerPath":containerpath,"HostPath":hostpath
+        } 
+        dockerprofile=dict(resourcemodeldict, **servermodeldict)
+        dockerprofile = str(dockerprofile)
+        projectservice.update_projectProfile(projectkey, dockerprofile)       
         return jsonify(updated=True)
 
-@project.route('/Container/ServerModel/Delete',methods=['POST'])
-def serverModelDelete():
+@project.route('/App/Delete',methods=['POST'])
+def deleteProject():
     dockerservice.serverModelDelete(request.json['ServerModelId'])
     return jsonify(deleted=True)    
 

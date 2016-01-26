@@ -29,4 +29,17 @@ def create_projectProfile(projectkey,dockerprofile):
     session.add(docker)
     session.commit()
     session.close()
+def update_projectProfile(projectkey,dockerprofile):
+    session = database.get_session()
+    docker = session.query(projectProfile).filter(projectProfile.ProjectKey == projectkey).one()
+    docker.DockerProfile = dockerprofile
+    docker.LastUpdateDate = datetime.now() 
+    session.commit()
+    session.close() 
+def query_projectProfile(projectkey):
+    session = database.get_session()
+    projectprofile = session.query(projectProfile).filter(projectProfile.ProjectKey == projectkey).one()
+    session.commit()
+    session.close()
+    return projectprofile         
       

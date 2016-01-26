@@ -6,7 +6,7 @@ class projectProfile(BaseModel):
 
     __tablename__ = 'projectProfile'
     Id = Column('Id', Integer,primary_key=True,nullable=False,autoincrement=True)
-    ProjectKey = Column('ProjectKey', NVARCHAR(30),nullable = False)
-    DockerProfile = Column('DockerProfile', NVARCHAR(200),nullable = False)
+    ProjectKey = Column('ProjectKey', NVARCHAR(60),nullable = False)
+    DockerProfile = Column('DockerProfile', NVARCHAR(600),nullable = False)
     CreateDate = Column('CreateDate', DateTime,nullable=False)
     LastUpdateDate = Column('LastUpdateDate', DateTime,nullable=False)
