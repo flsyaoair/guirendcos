@@ -1,17 +1,16 @@
+# -*- coding: UTF-8 -*- 
 from flask import Module,render_template,jsonify, redirect, request, session, g
 import time
 from marathon import MarathonClient
 from marathon.models.base import MarathonResource
 from marathon.models.app import MarathonTaskFailure
-import cmconfig
 from src.models.marathon import marathon
 from src.services import marathonservice
-# from configmanage.cmconfig import *
-# print type(MARATHON)
+from src.dcosconfig import *
 marathon = Module(__name__)
 # case.before_request(login_filter)
 # print MARATHON
-c = MarathonClient(cmconfig.MARATHON)
+c = MarathonClient(MARATHON)
 def marathoncollet():    
     appmetrics = c.get_metrics()
     appsIdList = c.list_apps()

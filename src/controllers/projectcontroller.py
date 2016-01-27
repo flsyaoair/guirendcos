@@ -63,7 +63,8 @@ def updateProjectProfile():
 
 @project.route('/App/Delete',methods=['POST'])
 def deleteProject():
-    dockerservice.serverModelDelete(request.json['ServerModelId'])
+    projectid = request.json['ProjectId']
+    projectservice.delete_project(projectid)
     return jsonify(deleted=True)    
 
 
