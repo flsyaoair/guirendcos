@@ -3,12 +3,10 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session,sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
-# from sqlalchemy.dialects.mysql import *
-# from configmanage.cmconfig  import *
-# from configmanage.cmconfig import *
 from math import  ceil
+from src.dcosconfig import *
 
-engine = create_engine('mysql+mysqlconnector://root:@127.0.0.1:3306/cm?charset=utf8',echo=True)
+engine = create_engine(DB,echo=True)
 BaseModel = declarative_base()
 
 def get_session():

@@ -1,5 +1,6 @@
 # -*- coding: UTF-8 -*- 
-from src.models import dockerServerModel,dockerResourceModel,database
+from src.models import database
+from src.models.docker import dockerServerModel,dockerResourceModel
 from datetime import datetime
 # from configmanage.collect import mesoscollet
 # cpus='1.0'
@@ -77,4 +78,16 @@ def query_resourceModelList():
     session = database.get_session()
     resourcemodellist = session.query(dockerResourceModel).all()
     session.close()
-    return resourcemodellist         
+    return resourcemodellist    
+
+def serverModelList(servermodel_id):
+    session = database.get_session()
+    servermodellist = session.query(dockerServerModel).filter(dockerServerModel.ServerModelId == servermodel_id).one()
+    session.close()
+    return servermodellist   
+    
+def resourceModelList(resourcemodel_id):
+    session = database.get_session()
+    resourcemodellist = session.query(dockerResourceModel).filter(dockerResourceModel.ResourceModelId == resourcemodel_id).one()
+    session.close()
+    return resourcemodellist      

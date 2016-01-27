@@ -1,7 +1,5 @@
 # -*- coding: UTF-8 -*- 
 from src.models.database import BaseModel
-# from testTeam.models.userprofile import UserProfile
-# from testTeam.models.project import Project
 from sqlalchemy import Column,DateTime,NVARCHAR,Integer,ForeignKey,UnicodeText
 
 class mesos(BaseModel):   
