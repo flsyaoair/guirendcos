@@ -61,6 +61,10 @@ def updateProjectProfile():
         projectservice.update_projectProfile(projectkey, dockerprofile)       
         return jsonify(updated=True)
 
+def projectList():
+    project_list = projectservice.query_project()
+    return render_template('App/List.html',projectlist=project_list)   
+
 @project.route('/App/Delete',methods=['POST'])
 def deleteProject():
     projectid = request.json['ProjectId']
