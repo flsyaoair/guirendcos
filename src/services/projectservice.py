@@ -52,5 +52,11 @@ def query_projectProfile(projectkey):
     session.commit()
     session.close()
     return projectprofile   
+def query_project():
+    session = database.get_session()
+    project_list = session.query(project).all()
+    session.commit()
+    session.close()
+    return project_list  
       
       
