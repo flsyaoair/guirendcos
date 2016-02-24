@@ -40,7 +40,7 @@ function LoginCtrl($scope, $http)
             }
             if (result.isMatch != null && result.isMatch) 
             {
-                window.location.href = '/Project';
+                window.location.href = '/Dashboard';
             }
         });
     };
