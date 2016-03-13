@@ -63,7 +63,7 @@ function RegisterCtrl($scope, $http)
             }
             else 
             {
-                window.location.href = '/Project';
+                window.location.href = '/Dashboard';
             }
         });
     }
