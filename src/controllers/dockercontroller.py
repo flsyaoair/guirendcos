@@ -79,10 +79,13 @@ def resourceDelete():
     return jsonify(deleted=True)    
 def resourceModelList():
     resouceModel_list = dockerservice.query_resourceModelList()
-    return render_template('ResourceModel/List.html',resouceModellist=resouceModel_list) 
+    return render_template('/Docker/ResourceModel/List.html',resouceModellist=resouceModel_list) 
+@docker.route('/Container/ResourceModel/List')
 def serverModelList():
     serverModel_list = dockerservice.query_serverModelList()
-    return render_template('ServerModel/List.html',serverModellist=serverModel_list)   
+    menuList = mailList()
+#     return render_template('/Docker/ServerModel/List.html',serverModellist=serverModel_list)
+    return render_template('/Docker/ServerModel/List.html',menu = menuList)   
 
 
 # @docker.route('/Container/MergeModel',methods=['POST'])     
@@ -96,7 +99,19 @@ def serverModelList():
 #         json.dump(readed, open('src/static/model/docker/app.json', 'w'))
 #         return 'ok'    
 
+def mailList ():
+        menuList = {
+        'index': {
+            'main': ''
+        },
 
+        'template': {
+            'main': 'active',
+            'sub1': '',
+            'sub2': 'active',
+        }
+    }
+        return menuList
 if __name__ == '__main__':
     print 'ok'   
     

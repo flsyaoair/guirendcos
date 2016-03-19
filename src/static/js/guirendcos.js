@@ -1,4 +1,4 @@
-﻿var app = angular.module('PowerTeam', []);
+﻿var app = angular.module('guirendcos', []);
 
 var INTEGER_REGEXP = /^\-?\d*$/;
 app.directive('integer', function () {
