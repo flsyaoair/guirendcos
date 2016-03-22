@@ -5,7 +5,12 @@ from flask import Module,render_template,jsonify,request,g
 from src.dcosconfig import *
 from src.services import dockerservice
 docker = Module(__name__)
-@docker.route('/Container/ServerModel',methods=['POST'])
+@docker.route('/Docker/ServerModel/Create')
+def create_ServerModel():
+#    requirementservice.create(request.json['RequirementName'],request.json['Versions'],request.json['Description'],g.user_id)
+
+    return render_template('Docker/ServerModel/Createtest.html')
+@docker.route('/Container/ServerModel/Create',methods=['POST'])
 #config docker profile
 def createContainerServerModel ():
         nickname = request.json['NickName']
@@ -85,9 +90,14 @@ def serverModelList():
     serverModel_list = dockerservice.query_serverModelList()
     menuList = mailList()
 #     return render_template('/Docker/ServerModel/List.html',serverModellist=serverModel_list)
-    return render_template('/Docker/ServerModel/List.html',menu = menuList)   
+    return render_template('/Docker/ServerModel/List.html',menu = menuList,servermodellist=serverModel_list)   
 
-
+# @docker.route('/Container/ResourceModel/List')
+# def serverModelList():
+#     serverModel_list = dockerservice.query_serverModelList()
+#     menuList = mailList()
+# #     return render_template('/Docker/ServerModel/List.html',serverModellist=serverModel_list)
+#     return jsonify(data=serverModel_list)
 # @docker.route('/Container/MergeModel',methods=['POST'])     
 # def MergeContainerProfile(servermodelid,resourcemodelid):
 #         try:
