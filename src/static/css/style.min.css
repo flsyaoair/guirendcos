@@ -4729,7 +4729,7 @@ ul.tagit.inverse li.tagit-choice .tagit-close:focus .ui-icon-close:before,ul.tag
 	position:absolute;
 	top:25px;
 	right:25px;
-	background:url(/static/assets/plugins/superbox/img/close.gif) center center no-repeat;
+	background:url(assets/plugins/superbox/img/close.gif) center center no-repeat;
 	width:35px;
 	height:35px
 }

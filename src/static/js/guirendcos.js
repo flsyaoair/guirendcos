@@ -1,4 +1,4 @@
-﻿var app = angular.module('PowerTeam', []);
+﻿var app = angular.module('guirendcos', []);
 
 var INTEGER_REGEXP = /^\-?\d*$/;
 app.directive('integer', function () {
@@ -271,35 +271,27 @@ function TeamCtrl($scope, $http) {
     }
 }
 
-function IssueCtrl($scope, $http) {
-    $scope.IssueList = [];
-    $scope.Query = { PageNo: 1, Subject: '', AssignTo: -1, CategoryId: -1, Open: true, Fixed: false, Closed: false, Canceled: false, RowCount: 0, PageCount: 0 };
+function ContainerServerModelCtrl($scope, $http) {
+	$scope.Success = false;
+    $scope.Exist = false;
     $scope.query = function () {
-        var btn = $("#btnQuery");
-        btn.button('loading');
-        $http.post('/Issue/Query', $scope.Query).success(function (result) {
-            btn.button('reset');
-            $scope.IssueList = result.data;
-            $scope.Query.RowCount = result.row_count;
-            $scope.Query.PageCount = result.page_count;
-            $scope.Query.PageNo = result.page_no;
+        $http.post('/Container/ResourceModel/List').success(function (result) { 
+        	$scope.ServerModelList = result.data;
+        	$scope.MenuList = result.menu;
         });
     }
-}
 
-function IssueCreateCtrl($scope, $http) {
+function ContainerServerModelCreateCtrl($scope, $http) {
     $scope.AddSuccess = false;
-    editor = UE.getEditor('editor');
-    $scope.Issue = { Subject: null, AssignTo: -1, Priority: 2, Description: null, CategoryId: -1 };
+    $scope.Container = {};
     $scope.create = function () {
         var btn = $("#btnCreate");
         btn.button('loading');
-        $scope.Issue.Description = editor.getContent();
-        $http.post('/Issue/CreateNew', $scope.Issue).success(function (result) {
+        $http.post('/Container/ServerModel/Create', $scope.ContainerServerModel).success(function (result) {
             if (result.created) {
                 $scope.AddSuccess = true;
                 btn.button('reset');
-                window.location.href = "/Project/Issue/" + result.ProjectId;
+                window.location.href = '/Container/ResourceModel/List/';   
             }
         });
     }

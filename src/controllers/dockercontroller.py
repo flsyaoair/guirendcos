@@ -5,7 +5,12 @@ from flask import Module,render_template,jsonify,request,g
 from src.dcosconfig import *
 from src.services import dockerservice
 docker = Module(__name__)
-@docker.route('/Container/ServerModel',methods=['POST'])
+@docker.route('/Docker/ServerModel/Create')
+def create_ServerModel():
+#    requirementservice.create(request.json['RequirementName'],request.json['Versions'],request.json['Description'],g.user_id)
+
+    return render_template('Docker/ServerModel/Createtest.html')
+@docker.route('/Container/ServerModel/Create',methods=['POST'])
 #config docker profile
 def createContainerServerModel ():
         nickname = request.json['NickName']
@@ -79,12 +84,20 @@ def resourceDelete():
     return jsonify(deleted=True)    
 def resourceModelList():
     resouceModel_list = dockerservice.query_resourceModelList()
-    return render_template('ResourceModel/List.html',resouceModellist=resouceModel_list) 
+    return render_template('/Docker/ResourceModel/List.html',resouceModellist=resouceModel_list) 
+@docker.route('/Container/ResourceModel/List')
 def serverModelList():
     serverModel_list = dockerservice.query_serverModelList()
-    return render_template('ServerModel/List.html',serverModellist=serverModel_list)   
+    menuList = mailList()
+#     return render_template('/Docker/ServerModel/List.html',serverModellist=serverModel_list)
+    return render_template('/Docker/ServerModel/List.html',menu = menuList,servermodellist=serverModel_list)   
 
-
+# @docker.route('/Container/ResourceModel/List')
+# def serverModelList():
+#     serverModel_list = dockerservice.query_serverModelList()
+#     menuList = mailList()
+# #     return render_template('/Docker/ServerModel/List.html',serverModellist=serverModel_list)
+#     return jsonify(data=serverModel_list)
 # @docker.route('/Container/MergeModel',methods=['POST'])     
 # def MergeContainerProfile(servermodelid,resourcemodelid):
 #         try:
@@ -96,7 +109,19 @@ def serverModelList():
 #         json.dump(readed, open('src/static/model/docker/app.json', 'w'))
 #         return 'ok'    
 
+def mailList ():
+        menuList = {
+        'index': {
+            'main': ''
+        },
 
+        'template': {
+            'main': 'active',
+            'sub1': '',
+            'sub2': 'active',
+        }
+    }
+        return menuList
 if __name__ == '__main__':
     print 'ok'   
     
