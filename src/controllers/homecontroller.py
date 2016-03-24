@@ -12,25 +12,25 @@ home = Module(__name__)
 def index():
     if 'username' in session and not session['username'] == None:
         return redirect('/Dashboard')
-    return render_template('Login.html',
-                           title = u'登陆'
-                           )
+    else:
+        return render_template('Login.html', title = u'登陆')
 
 @home.route('/Login',methods=['POST'])
 def login():
     email = request.json['Email']
     password = request.json['Password']
     user = userservice.get(email)
+
     if user == None:
-        response = jsonify(isDisabled = False,isMatch=False)
+        response = jsonify(user = False)
         return response
 
     if user.Status == UserStatus.Disabled:
-        response = jsonify(isDisabled = True,isMatch=None)
+        response = jsonify(userStatus = False)
         return response
 
     if not user.Password == password:
-        response = jsonify(isDisabled = False,isMatch=False)
+        response = jsonify(userPassword = False)
         return response
 
     session['userid'] = user.UserId
