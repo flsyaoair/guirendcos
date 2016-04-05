@@ -8,12 +8,7 @@ from src.models.userprofile import UserStatus
 home = Module(__name__)
 
 
-@home.route('/')
-def index():
-    if 'username' in session and not session['username'] == None:
-        return redirect('/Dashboard')
-    else:
-        return render_template('Login.html', title = u'登陆')
+
 
 @home.route('/Login',methods=['POST'])
 def login():

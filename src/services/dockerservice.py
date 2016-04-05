@@ -19,6 +19,7 @@ def create_dockerservermodel(nickname,imagetype,imagename,containerport,hostport
     session.add(docker)
     session.commit()
     session.close()
+    
 def update_dockerservermodel(servermodel_id,imagename,containerport,hostport,containerpath,hostpath):
     session = database.get_session()
     docker = session.query(dockerServerModel).filter(dockerServerModel.ServerModelId == servermodel_id).one()

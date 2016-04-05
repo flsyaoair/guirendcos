@@ -5,7 +5,7 @@ dashboard = Module(__name__)
 
 dashboard.before_request(login_filter)
 
-@dashboard.route('/Dashboard')
+@dashboard.route('/')
 def index():
     menuList = {
         'index': {
