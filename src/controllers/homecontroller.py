@@ -7,7 +7,9 @@ from src.models.userprofile import UserStatus
 
 home = Module(__name__)
 
-
+@home.route('/')
+def index():
+    return render_template('index.html', title = u'镜像库')
 
 
 @home.route('/Login',methods=['POST'])

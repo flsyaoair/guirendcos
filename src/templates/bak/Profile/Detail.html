@@ -1,0 +1,110 @@
+﻿{% extends 'TestTeamLayout.html'%}
+{% block subcontent %}
+<div class="post" ng-controller="UpdateProfileCtrl" ng-init="User.Email='((User.Email))';User.Nick='((User.Nick))';">
+    <div class="post-header"><strong><i class="fa fa-info fa-fw"></i>基本信息</strong></div>
+    <div class="panel-body">
+        <form class="form-horizontal" role="form" name="updateProfileForm" novalidate>
+            <div class="form-group">
+                <div class="alert alert-success alert-dismissable" ng-show="UpdateSuccess">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <strong>信息修改成功!</strong>
+                </div>
+                <div class="alert alert-danger alert-dismissable" ng-show="Error">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <strong>电子邮件已存在,请更换其他电子邮件!</strong>
+                </div>
+                <label class="col-sm-2 control-label"><span class="text-danger">*</span>电子邮件</label>
+                <div class="col-sm-7">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-envelope fa-fw"></i></span>
+                        <input type="email" name="Email" ng-model="User.Email" class="form-control default-focus" placeholder="电子邮件" ng-maxlength="255" required />
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div ng-show="updateProfileForm.Email.$dirty&&updateProfileForm.Email.$error.required" class="text-danger">请输入电子邮件</div>
+                    <div ng-show="updateProfileForm.Email.$dirty&&updateProfileForm.Email.$error.maxlength" class="text-danger">电子邮件最大长度为255</div>
+                    <div ng-show="updateProfileForm.Email.$dirty&&updateProfileForm.Email.$error.email" class="text-danger">电子邮件格式不合法</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label"><span class="text-danger">*</span>昵称</label>
+                <div class="col-sm-7">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
+                        <input type="text" name="Nick" ng-model="User.Nick" class="form-control" placeholder="昵称" ng-maxlength="10" required />
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div ng-show="updateProfileForm.Nick.$dirty&&updateProfileForm.Nick.$error.required" class="text-danger">请输入昵称</div>
+                    <div ng-show="updateProfileForm.Nick.$dirty&&updateProfileForm.Nick.$error.maxlength" class="text-danger">昵称的最大长度为10</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="button" id="btnUpdateProfile" class="btn btn-primary" ng-disabled="updateProfileForm.$dirty&&updateProfileForm.$invalid" data-loading-text="正在更新" ng-click="update()"><i class="fa fa-save fa-fw"></i>更新</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="post" ng-controller="ChangePasswordCtrl">
+    <div class="post-header"><strong><i class="fa fa-key fa-fw"></i>修改密码</strong></div>
+    <div class="panel-body">
+        <form class="form-horizontal" role="form" name="changePasswordForm" novalidate>
+            <div class="alert alert-success alert-dismissable" ng-show="UpdateSuccess">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <strong>密码修改成功!</strong>
+            </div>
+            <div class="alert alert-danger alert-dismissable" ng-show="Error">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <strong>原密码不正确!</strong>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label"><span class="text-danger">*</span>原密码</label>
+                <div class="col-sm-7">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-lock fa-fw"></i></span>
+                        <input type="password" name="RawPassword" ng-model="User.RawPassword" class="form-control" placeholder="原密码" ng-maxlength="20" required />
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div ng-show="changePasswordForm.RawPassword.$dirty&&changePasswordForm.RawPassword.$error.required" class="text-danger">请输入原密码</div>
+                    <div ng-show="changePasswordForm.RawPassword.$dirty&&changePasswordForm.RawPassword.$error.maxlength" class="text-danger">原密码最大长度为20</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label"><span class="text-danger">*</span>新密码</label>
+                <div class="col-sm-7">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-lock fa-fw"></i></span>
+                        <input type="password" name="Password" ng-model="User.Password" class="form-control" placeholder="密码" ng-maxlength="20" required />
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div ng-show="changePasswordForm.Password.$dirty&&changePasswordForm.Password.$error.required" class="text-danger">请输入新密码</div>
+                    <div ng-show="changePasswordForm.Password.$dirty&&changePasswordForm.Password.$error.maxlength" class="text-danger">新密码最大长度为20</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label"><span class="text-danger">*</span>确认新密码</label>
+                <div class="col-sm-7">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-lock fa-fw"></i></span>
+                        <input type="password" name="ConfirmPassword" ng-model="User.ConfirmPassword" class="form-control" placeholder="确认密码" ng-maxlength="20" required />
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div ng-show="changePasswordForm.ConfirmPassword.$dirty&&changePasswordForm.ConfirmPassword.$error.required" class="text-danger">请输入确认密码</div>
+                    <div ng-show="changePasswordForm.ConfirmPassword.$dirty&&changePasswordForm.ConfirmPassword.$error.maxlength" class="text-danger">确认密码最大长度为20</div>
+                    <div ng-show="changePasswordForm.Password.$dirty&&changePasswordForm.ConfirmPassword.$dirty&&User.ConfirmPassword!=User.Password" class="text-danger">两次密码不一致</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="button" id="btnUpdate" class="btn btn-primary" ng-disabled="changePasswordForm.$invalid||User.ConfirmPassword!=User.Password" data-loading-text="正在更新" ng-click="update()"><i class="fa fa-save fa-fw"></i>更新</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

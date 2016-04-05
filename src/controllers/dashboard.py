@@ -5,7 +5,7 @@ dashboard = Module(__name__)
 
 dashboard.before_request(login_filter)
 
-@dashboard.route('/')
+@dashboard.route('/Dashboard')
 def index():
     menuList = {
         'index': {
@@ -18,7 +18,7 @@ def index():
             'sub2': '',
         }
     }
-    return render_template('Dashboard/index.html',menu = menuList)
+    return render_template('Dashboard/index.html', menu = menuList)
 
 @dashboard.route('/template/container')
 def container():

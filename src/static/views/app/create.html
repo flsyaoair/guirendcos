@@ -1,0 +1,130 @@
+<div class="col-md-12 ui-sortable" ng-controller="isoMake" ng-init="init()">
+    <!-- begin panel -->
+    <div class="panel panel-inverse" data-sortable-id="form-stuff-1">
+        <div class="panel-heading">
+            <div class="panel-heading-btn">
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand" data-original-title="" title=""><i class="fa fa-expand"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload" data-original-title="" title=""><i class="fa fa-repeat"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+            </div>
+            <h4 class="panel-title">创建应用</h4>
+        </div>
+        <div class="panel-body">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-md-3 control-label">应用名称</label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" placeholder="应用名称">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="col-md-3 control-label">中文名</label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" placeholder="中文名">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-3 control-label">版本号</label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" placeholder="版本号">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-3 control-label">模板</label>
+                    <div class="col-md-9">
+                        <label class="radio-inline">
+                            <input type="radio" name="optionsRadios" value="option1" checked="">
+                            模板 1
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="optionsRadios" value="option2">
+                            模板 2
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="col-md-3 control-label">应用包上传</label>
+                    <div class="col-md-9">
+                        <!-- <form id="fileupload" action="assets/global/plugins/jquery-file-upload/server/php/" method="POST" enctype="multipart/form-data" class=""> -->
+                            <div class="row fileupload-buttonbar">
+                                <div class="col-md-7">
+                                    <span class="btn btn-success fileinput-button">
+                                        <i class="fa fa-plus"></i>
+                                        <span>Add files...</span>
+                                        <input type="file" name="files[]" multiple="">
+                                    </span>
+                                    <button type="submit" class="btn btn-primary start">
+                                        <i class="fa fa-upload"></i>
+                                        <span>Start upload</span>
+                                    </button>
+                                    <button type="reset" class="btn btn-warning cancel">
+                                        <i class="fa fa-ban"></i>
+                                        <span>Cancel upload</span>
+                                    </button>
+                                    <button type="button" class="btn btn-danger delete">
+                                        <i class="glyphicon glyphicon-trash"></i>
+                                        <span>Delete</span>
+                                    </button>
+                                    <!-- The global file processing state -->
+                                    <span class="fileupload-process"></span>
+                                </div>
+                                <!-- The global progress state -->
+                                <div class="col-md-5 fileupload-progress fade">
+                                    <!-- The global progress bar -->
+                                    <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                                        <div class="progress-bar progress-bar-success" style="width:0%;"></div>
+                                    </div>
+                                    <!-- The extended global progress state -->
+                                    <div class="progress-extended">&nbsp;</div>
+                                </div>
+                            </div>
+                            <!-- The table listing the files available for upload/download -->
+                            <table role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
+                            <div class="alert alert-danger">Upload server currently unavailable - Mon Mar 28 2016 22:07:24 GMT+0800</div>
+                        <!-- </form> -->
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="col-md-3 control-label">生成方式</label>
+                    <div class="col-md-9">
+                        <label class="radio-inline">
+                            <input type="radio" name="optionsRadios" value="option1" checked="">
+                            镜像
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="optionsRadios" value="option2">
+                            普通
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="col-md-3 control-label">发布服务</label>
+                    <div class="col-md-9">
+                        <label class="radio-inline">
+                            <input type="radio" name="optionsRadios" value="option1" checked="">
+                            测试
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="optionsRadios" value="option2">
+                            生产
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-9 col-md-offset-3">
+                        <a href="#/app/status" class="btn btn-primary btn-lg m-r-5">运行</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- end panel -->
+</div>

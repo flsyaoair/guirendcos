@@ -110,7 +110,7 @@ def serverModelList():
 #         return 'ok'    
 
 def mailList ():
-        menuList = {
+    menuList = {
         'index': {
             'main': ''
         },
@@ -121,7 +121,9 @@ def mailList ():
             'sub2': 'active',
         }
     }
-        return menuList
+
+    return menuList
+    
 if __name__ == '__main__':
     print 'ok'   
     

@@ -1,0 +1,63 @@
+<!-- begin #sidebar -->
+<div id="sidebar" class="sidebar" ng-controller="sidebar" ng-init="init()">
+	<!-- begin sidebar scrollbar -->
+	<div data-scrollbar="true" data-height="100%">
+		<!-- begin sidebar nav -->
+		<ul class="nav">
+			<li class="has-sub">
+				<a href="javascript:;">
+					<b class="caret pull-right"></b>
+				    <i class="fa fa-laptop"></i>
+				    <span>镜像库</span>
+			    </a>
+			    <ul class="sub-menu">
+				    <li ng-class="{active:path=='/iso/list'}"><a href="#/iso/list">列表</a></li>
+				    <li ng-class="{active:path=='/iso/make'}"><a href="#/iso/make">制作镜像</a></li>
+				</ul>
+			</li>
+			<li class="has-sub">
+				<a href="javascript:;">
+					<b class="caret pull-right"></b>
+					<i class="fa fa-inbox"></i> 
+					<span>发布</span>
+				</a>
+				<ul class="sub-menu">
+				    <li ng-class="{active:path=='/app/create'}"><a href="#/app/create">创建应用</a></li>
+				    <li ng-class="{active:path=='/app/status'}"><a href="#/app/status">发布状态</a></li>
+				</ul>
+			</li>
+			<li class="has-sub">
+				<a href="javascript:;">
+				    <b class="caret pull-right"></b>
+				    <i class="fa fa-suitcase"></i>
+				    <span>容器</span> 
+				</a>
+				<ul class="sub-menu">
+					<li><a href="javascript:;">容器性能</a></li>
+					<li><a href="javascript:;">路由性能</a></li>
+					<li><a href="javascript:;">告警</a></li>
+					<li><a href="javascript:;">统一性</a></li>
+				</ul>
+			</li>
+			<li>
+				<a href="javascript:;">
+				    <i class="fa fa-file-o"></i>
+				    <span>持续集成</span> 
+				</a>
+			</li>
+			<li>
+				<a href="javascript:;">
+				    <i class="fa fa-file-o"></i>
+				    <span>压测中心</span> 
+				</a>
+			</li>
+	        <!-- begin sidebar minify button -->
+			<li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li>
+	        <!-- end sidebar minify button -->
+		</ul>
+		<!-- end sidebar nav -->
+	</div>
+	<!-- end sidebar scrollbar -->
+</div>
+<div class="sidebar-bg"></div>
+<!-- end #sidebar -->
